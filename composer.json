@@ -1,0 +1,31 @@
+{
+    "name": "phalcon/project",
+    "type": "project",
+    "require": {
+        "php": ">= 7.2",
+        "ext-curl": "*",
+        "ext-iconv": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-phalcon": "~3.4",
+        "vlucas/phpdotenv": "^3.5",
+        "whoops/phalcon": "^2.0"
+    },
+    "require-dev": {
+        "snowair/phalcon-debugbar": "^1.2"
+    },
+    "autoload": {
+        "files": [
+            "common/Support/helpers.php"
+        ],
+        "psr-4": {
+            "Common\\": "common/",
+            "Modules\\": "modules/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}
