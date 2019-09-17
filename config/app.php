@@ -11,7 +11,6 @@ return [
     */
     'services' => [
         "router"             => \Phalcon\Mvc\Router::class,
-        "view"               => \Common\Services\View::class,
         "dispatcher"         => \Phalcon\Mvc\Dispatcher::class,
         "url"                => \Phalcon\Mvc\Url::class,
         "modelsManager"      => \Phalcon\Mvc\Model\Manager::class,
@@ -31,7 +30,19 @@ return [
         "sessionBag"         => \Phalcon\Session\Bag::class,
         "eventsManager"      => \Phalcon\Events\Manager::class,
         "transactionManager" => \Phalcon\Mvc\Model\Transaction\Manager::class,
-        "assets"             => \Phalcon\Assets\Manager::class
+        "assets"             => \Phalcon\Assets\Manager::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Autoloaded providers
+    |--------------------------------------------------------------------------
+    */
+    'providers' => [
+        \Common\Providers\SessionProvider::class,
+        \Common\Providers\DispatcherProvider::class,
+        \Common\Providers\DatabaseProvider::class,
+        \Common\Providers\ViewProvider::class,
     ],
 
     /*

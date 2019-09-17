@@ -25,14 +25,14 @@ require_once BASE_PATH . '/vendor/autoload.php';
 | Builds the application
 |--------------------------------------------------------------------------
 */
-$di = new \Phalcon\Di;
+$di = new \Phalcon\Di\FactoryDefault;
 $app = new \Phalcon\Mvc\Application($di);
 
 $config = config('app');
 
-$services = $config->path('services')->toArray();
-foreach ($services as $name => $service) {
-    $di->set($name, $service, true);
+$providers = $config->path('providers')->toArray();
+foreach ($providers as $provider) {
+    $di->register(new $provider);
 }
 
 $app->registerModules($config->path('modules')->toArray());
@@ -46,9 +46,9 @@ if ('production' === getenv('APP_ENV')) {
     error_reporting(0);
 } else {
     error_reporting(E_ALL);
-    (new \Whoops\Run)->pushHandler(new \Whoops\Handler\PrettyPageHandler)->register(); // whoops
     $di->set('app', $app, true);
-    (new \Snowair\Debugbar\ServiceProvider)->start(); // debugbar
+    (new \Snowair\Debugbar\ServiceProvider(BASE_PATH . '/config/debugbar.php'))->start(); // debugbar
+    (new \Phalcon\Debug)->listen(true, true);
 }
 
 /*
@@ -56,4 +56,5 @@ if ('production' === getenv('APP_ENV')) {
 | Finishes
 |--------------------------------------------------------------------------
 */
-$app->handle()->send();
+// $app->handle()->send();
+echo $app->handle()->getContent();

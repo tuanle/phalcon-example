@@ -28,7 +28,19 @@ class Routes extends RouterGroup
      */
     protected function addRoutes()
     {
-        $this->addGet('/welcome', ['controller' => 'Welcome', 'action' => 'index'])
-            ->setName('admin.login.form');
+        $this->addGet('/users', ['controller' => 'Users', 'action' => 'index'])
+            ->setName('admin.users.index');
+
+        $this->addGet('/users/create', ['controller' => 'Users', 'action' => 'create'])
+            ->setName('admin.users.create');
+
+        $this->addPost('/users/create', ['controller' => 'Users', 'action' => 'create'])
+            ->setName('admin.users.store');
+
+        $this->addGet('/users/{id}/edit', ['controller' => 'Users', 'action' => 'edit'])
+            ->setName('admin.users.edit');
+
+        $this->addPost('/users/{id}/edit', ['controller' => 'Users', 'action' => 'edit'])
+            ->setName('admin.users.update');
     }
 }
